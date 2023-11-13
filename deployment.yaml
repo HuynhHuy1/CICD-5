@@ -18,4 +18,4 @@ spec:
       - name: app-demo
         image: huy21it490/democicd:latest
         ports:
-        - containerPort: 3080
+        - containerPort: 8000
