@@ -35,7 +35,7 @@ pipeline {
                 // sh 'docker build -t democicd .'
                 // sh 'docker container run -d --rm --name democicd -p 8081:8000 democicd' 
                 script {
-                    withKubeConfig([credentialsId: 'kubectl', serverUrl: 'http://34.143.232.173:6443']) {
+                    withKubeConfig([credentialsId: 'kubectl', serverUrl: 'https://34.143.232.173:6443']) {
                         sh 'kubectl apply -f deployment.yaml'
                     }
                 }
