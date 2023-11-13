@@ -21,8 +21,8 @@ pipeline {
         stage('Packaging/Pushing imagae') {
             steps {
                 withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
-                    sh 'sudo docker build -t huy21it490/democicd .'
-                    sh 'sudo docker push huy21it490/democicd'
+                    sh 'docker build -t huy21it490/democicd .'
+                    sh 'docker push huy21it490/democicd'
                 }
             }
         }
@@ -46,9 +46,9 @@ pipeline {
         stage('Deploy Spring Boot to DEV') {
             steps {
                 echo 'Deploying and cleaning'
-                sh 'sudo docker container rm -f democicd || echo "No such container"'
-                sh 'sudo docker build -t democicd .'
-                sh 'sudo docker container run -d --rm --name democicd -p 8081:8000 democicd' 
+                sh 'docker container rm -f democicd || echo "No such container"'
+                sh 'docker build -t democicd .'
+                sh 'docker container run -d --rm --name democicd -p 8081:8000 democicd' 
             }
         }
     }
