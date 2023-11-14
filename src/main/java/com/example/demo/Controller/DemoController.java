@@ -8,6 +8,6 @@ public class DemoController {
 
     @GetMapping("/")
     public String hello() {
-        return "Hôm nay là thứ 2";
+        return "Hôm nay là thứ 3";
     }
 }
