@@ -23,25 +23,16 @@ pipeline {
                 withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
                     sh 'docker build -t huy21it490/democicd .'
                     sh 'docker push huy21it490/democicd'
-                    sh 'docker image rm -f huy21it490/democicd || echo "No such container"'
                 }
             }
         }
 
-
-        stage('Deploy Spring Boot to Kubernetes') {
+        stage('Deploy Spring Boot to DEV') {
             steps {
-                // echo 'Deploying and cleaning'
-                // sh 'docker container rm -f democicd || echo "No such container"'
-                // sh 'docker build -t democicd .'
-                // sh 'docker container run -d --rm --name democicd -p 8081:8000 democicd' 
-                script {
-                    withCredentials([file(credentialsId: 'kubectl', variable: 'KUBECONFIG_FILE')]) {
-                            sh "cat \$KUBECONFIG_FILE"
-                            sh "cp \$KUBECONFIG_FILE  $HOME/.kubeconfig"
-                            sh 'kubectl apply -f deployment.yaml'
-                    }
-                }
+                echo 'Deploying and cleaning'
+                sh 'docker container rm -f democicd || echo "No such container"'
+                sh 'docker build -t democicd .'
+                sh 'docker container run -d --rm --name democicd -p 8081:8000 democicd' 
             }
         }
     }
