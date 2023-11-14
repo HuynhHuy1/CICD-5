@@ -23,6 +23,7 @@ pipeline {
                 withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
                     sh 'docker build -t huy21it490/democicd .'
                     sh 'docker push huy21it490/democicd'
+                    sh 'docker image rm -f huy21it490/democicd'
                 }
             }
         }
@@ -37,7 +38,7 @@ pipeline {
                 script {
                     withCredentials([file(credentialsId: 'kubectl', variable: 'KUBECONFIG_FILE')]) {
                             sh "cat \$KUBECONFIG_FILE"
-                            sh "cp \$KUBECONFIG_FILE  $HOME/.kube/config"
+                            sh "cp \$KUBECONFIG_FILE  $HOME/.kubeconfig"
                             sh 'kubectl apply -f deployment.yaml'
                     }
                 }
