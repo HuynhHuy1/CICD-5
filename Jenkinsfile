@@ -23,7 +23,7 @@ pipeline {
                 withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
                     sh 'docker build -t huy21it490/democicd .'
                     sh 'docker push huy21it490/democicd'
-                    sh 'docker container rm -f huy21it490/democicd || echo "No such container"'
+                    sh 'docker image rm -f huy21it490/democicd || echo "No such container"'
                 }
             }
         }
